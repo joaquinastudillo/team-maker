@@ -2,30 +2,26 @@
   <div id="app">
     <header-app></header-app>
     <content-app></content-app>
+    <footer-app></footer-app>
   </div>
 </template>
 
 <script>
 import HeaderApp from './components/layout/Header'
 import ContentApp from './components/layout/Content'
+import FooterApp from './components/layout/Footer'
 
 export default {
   name: 'app',
   components: {
     HeaderApp,
-    ContentApp
+    ContentApp,
+    FooterApp
   }
 }
 </script>
 
 <style>
 
-html{
-   background: url('./assets/background.jpg') no-repeat center center fixed ; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 </style>

@@ -1,15 +1,7 @@
 <template>
-     <div class="hero-body" id="content-hero">
-                <div class="container has-text-centered">
-                    <div class="column is-6 is-offset-3">
-                        <h1 class="title" id="main-title">
-                            Match Creator
-                        </h1>
-
-                        <a class="button is-large is-success is-outlined">Large</a>
-
-                    </div>
-                </div>
+    <div>
+        <loading-app :active="loadingState" :is-full-screen="true"></loading-app>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -20,3 +12,20 @@
 }
 
 </style>
+
+<script>
+
+import VueElementLoading from 'vue-element-loading'
+
+    export default {
+        name: 'ContentApp',
+        components: {
+            'LoadingApp': VueElementLoading
+        },
+        computed: {
+            loadingState(){
+                return this.$store.getters.loadingState
+            }
+        }
+    }
+</script>
