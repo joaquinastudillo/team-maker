@@ -16,9 +16,9 @@
         data(){
             return {
                 step: {
-                    id: 1,
-                    name: "Step One",
-                    description: "This is the first step",
+                    id: 2,
+                    name: "Step Two",
+                    description: "This is the second step",
                     isActiveStep: false
                 }
             }

@@ -18,14 +18,12 @@
                             </div>
                             <div class="content article-body">
                                 <div class="steps">
-                                    <div class="step-item">
-                                        <div class="step-marker">1</div>
-                                        <div class="step-details">
-                                        <p class="step-title">Step 1</p>
-                                        <p>This is the first step of the process.</p>
-                                        </div>
-                                    </div>
+                                    <first-step-app></first-step-app>
+                                    <second-step-app></second-step-app>
                                 </div>
+
+                                <first-step-app-view v-if="activeStep == 1"></first-step-app-view>
+
                             </div>
                         </div>
                     </div>
@@ -38,7 +36,20 @@
 <script>
     import '../../../node_modules/bulma-extensions/bulma-steps/dist/js/bulma-steps.js'
     import '../../../node_modules/bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css'
+    import firstStepApp from './steps/firstStep.vue'
+    import firstStepAppView from './steps-views/firstStepView.vue'
+    import SecondStepApp from './steps/SecondStep.vue'
     export default {
-        name: 'StepperApp'
+        name: 'StepperApp',
+        components: {
+            firstStepApp,
+            firstStepAppView,
+            SecondStepApp
+        },
+        computed: {
+            activeStep(){
+                return this.$store.getters.activatedStep
+            }
+        }
     }
 </script>

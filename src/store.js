@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        loading: false
+        loading: false,
+        activeStep: 2
     },
     mutations: {
         activateLoading(state){
@@ -18,6 +19,9 @@ export const store = new Vuex.Store({
     getters: {
         loadingState: state => {
             return state.loading
+        },
+        activatedStep: state => {
+            return state.activeStep
         }
     }
 })
