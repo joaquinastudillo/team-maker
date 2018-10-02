@@ -1,5 +1,6 @@
 import MainApp from './components/content/Main.vue'
 import StepperApp from './components/content/Stepper.vue'
+import firstStepApp from './components/content/steps/FirstStep.vue'
 
 export const routes = [
     {
@@ -8,7 +9,13 @@ export const routes = [
     },
     {
         path: '/stepper',
-        component: StepperApp
+        component: StepperApp,
+        children: [
+            {
+                path: 'firstStep',
+                component: firstStepApp
+            }
+        ]
     }
 ]
 
