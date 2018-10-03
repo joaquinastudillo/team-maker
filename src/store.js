@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loading: false,
-        activeStep: 2
+        activeStep: 1
     },
     mutations: {
         activateLoading(state){
@@ -14,6 +14,12 @@ export const store = new Vuex.Store({
         },
         desactivateLoading(state){
             state.loading = false
+        },
+        nextStep(state){
+            if(state.activeStep < 3) state.activeStep++
+        },
+        prevStep(state){
+            if(state.activeStep > 1) state.activeStep--
         }
     },
     getters: {

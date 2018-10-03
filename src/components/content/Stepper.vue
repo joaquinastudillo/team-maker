@@ -20,10 +20,36 @@
                                 <div class="steps">
                                     <first-step-app></first-step-app>
                                     <second-step-app></second-step-app>
+                                    <third-step-app></third-step-app>
                                 </div>
 
                                 <first-step-app-view v-if="activeStep == 1"></first-step-app-view>
-
+                                <second-step-view-app v-if="activeStep == 2"></second-step-view-app>
+                                <third-step-view-app v-if="activeStep == 3"></third-step-view-app>
+                                
+                                <br>
+                                
+                                <div class="steps-actions">
+                                    <div class="field is-grouped">
+                                        <p class="control">
+                                            <a class="button" 
+                                               @click="$store.commit('prevStep')" 
+                                               :disabled="$store.state.activeStep <= 1"
+                                               >
+                                            previous
+                                            </a>
+                                        </p>
+                                        <p class="control">
+                                            <a class="button" 
+                                               @click="$store.commit('nextStep')"
+                                               :disabled="$store.state.activeStep >= 3"
+                                               >
+                                            next
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -34,22 +60,28 @@
 </template>
 
 <script>
-    import '../../../node_modules/bulma-extensions/bulma-steps/dist/js/bulma-steps.js'
-    import '../../../node_modules/bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css'
-    import firstStepApp from './steps/firstStep.vue'
-    import firstStepAppView from './steps-views/firstStepView.vue'
-    import SecondStepApp from './steps/SecondStep.vue'
-    export default {
-        name: 'StepperApp',
-        components: {
-            firstStepApp,
-            firstStepAppView,
-            SecondStepApp
-        },
-        computed: {
-            activeStep(){
-                return this.$store.getters.activatedStep
-            }
-        }
+import "../../../node_modules/bulma-extensions/bulma-steps/dist/js/bulma-steps.js";
+import "../../../node_modules/bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css";
+import firstStepApp from "./steps/firstStep.vue";
+import firstStepAppView from "./steps-views/firstStepView.vue";
+import SecondStepApp from "./steps/SecondStep.vue";
+import SecondStepViewApp from "./steps-views/SecondStepView.vue";
+import ThirdStepApp from "./steps/ThirdStep.vue";
+import ThirdStepViewApp from "./steps-views/ThirdStepView.vue";
+export default {
+  name: "StepperApp",
+  components: {
+    firstStepApp,
+    firstStepAppView,
+    SecondStepApp,
+    SecondStepViewApp,
+    ThirdStepApp,
+    ThirdStepViewApp
+  },
+  computed: {
+    activeStep() {
+      return this.$store.getters.activatedStep;
     }
+  }
+};
 </script>
