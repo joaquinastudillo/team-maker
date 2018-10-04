@@ -6,7 +6,12 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loading: false,
-        activeStep: 1
+        activeStep: 1,
+        match: {
+                    price: null,
+                    duration: null,
+                    location: null
+        }
     },
     mutations: {
         activateLoading(state){
@@ -20,6 +25,15 @@ export const store = new Vuex.Store({
         },
         prevStep(state){
             if(state.activeStep > 1) state.activeStep--
+        },
+        updateMatchPrice(state, price){
+            state.match.price = price
+        },
+        updateMatchDuration(state, duration){
+            state.match.duration = duration
+        },
+        updateMatchLocation(state, location){
+            state.match.location = location
         }
     },
     getters: {

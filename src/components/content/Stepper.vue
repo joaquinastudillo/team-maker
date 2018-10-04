@@ -83,5 +83,5 @@ export default {
       return this.$store.getters.activatedStep;
     }
   }
-};
+}
 </script>
