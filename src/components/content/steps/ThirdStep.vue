@@ -17,8 +17,8 @@
             return {
                 step: {
                     id: 3,
-                    name: "Step Three",
-                    description: "This is the three step",
+                    name: "Teams",
+                    description: "Generate teams randomly",
                     isActiveStep: false
                 }
             }

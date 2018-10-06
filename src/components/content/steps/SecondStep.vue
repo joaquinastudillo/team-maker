@@ -17,8 +17,8 @@
             return {
                 step: {
                     id: 2,
-                    name: "Step Two",
-                    description: "This is the second step",
+                    name: "Players",
+                    description: "Add players to the match",
                     isActiveStep: false
                 }
             }

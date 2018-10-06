@@ -10,8 +10,10 @@ export const store = new Vuex.Store({
         match: {
                     price: null,
                     duration: null,
-                    location: null
-        }
+                    location: null,
+                    players: [{"id":4,"name":"leo","surname":"muñoz"},{"id":8,"name":"ignacio","surname":"ortega"},{"id":3,"name":"rodrigo","surname":"muñoz"},{"id":2,"name":"joaquin","surname":"astudillo"},{"id":5,"name":"diego","surname":"oñate"},{"id":10,"name":"leo","surname":"figueroa"},{"id":9,"name":"esteban","surname":"re-bufel"},{"id":7,"name":"martin","surname":"mujica"},{"id":1,"name":"rodrigo","surname":"cretier"},{"id":6,"name":"maxi","surname":"mujica"}]
+        },
+        playerIdCounter: 1,
     },
     mutations: {
         activateLoading(state){
@@ -34,6 +36,16 @@ export const store = new Vuex.Store({
         },
         updateMatchLocation(state, location){
             state.match.location = location
+        },
+        addPlayer(state, payload){
+            state.match.players.push({
+                id: this.state.playerIdCounter++,
+                name: payload.playerName,
+                surname: payload.playerSurname
+            })
+        },
+        updatePlayers(state, payload){
+            state.match.players = payload
         }
     },
     getters: {
@@ -42,6 +54,55 @@ export const store = new Vuex.Store({
         },
         activatedStep: state => {
             return state.activeStep
+        },
+        players: state => {
+            return state.match.players
+        },
+        randomTeams: state => {
+            let players = state.match.players
+            let counter = players.length
+            let temporalValue
+            let index
+
+            while(counter > 0){
+                index = Math.floor(Math.random() * counter)
+                counter--
+                temporalValue = players[counter]
+                players[counter] = players[index]
+                players[index] = temporalValue
+            }
+
+            return players
+        },
+        location: state => {
+            return state.match.location
+        },
+        price: state => {
+            return state.match.price
+        },
+        duration: state => {
+            return state.match.duration
         }
     }
 })
+
+/*
+
+generateTeams() {
+     console.log('in')
+      let temporalTeams = this.teams
+      let counter = temporalTeams.length;
+      let temporalValue;
+      let index;
+
+      while (counter > 0) {
+        index = Math.floor(Math.random() * counter);
+        counter--;
+        temporalValue = temporalTeams[counter];
+        temporalTeams[counter] = temporalTeams[index];
+        temporalTeams[index] = temporalValue;
+      }
+      return temporalTeams;
+    }
+
+    */

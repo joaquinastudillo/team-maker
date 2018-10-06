@@ -8,10 +8,10 @@
                             <div class="media">
                                 <div class="media-content has-text-centered">
                                     <p class="title article-title">
-                                        Stepper
+                                        Let's create teams
                                     </p>
                                     <div class="tags has-addons level-item">
-                                        <span class="tag is-rounded is-info">@skeetskeet</span>
+                                        <span class="tag is-rounded is-info">@joaquin_cl</span>
                                         <span class="tag is-rounded">May 10, 2018</span>
                                     </div>
                                 </div>
@@ -26,10 +26,10 @@
                                 <first-step-app-view v-if="activeStep == 1"></first-step-app-view>
                                 <second-step-view-app v-if="activeStep == 2"></second-step-view-app>
                                 <third-step-view-app v-if="activeStep == 3"></third-step-view-app>
-                                
-                                <br>
-                                
-                                <div class="steps-actions">
+                            
+                            </div>
+                        </div>
+                         <div class="steps-actions">
                                     <div class="field is-grouped">
                                         <p class="control">
                                             <a class="button" 
@@ -48,9 +48,6 @@
                                             </a>
                                         </p>
                                     </div>
-                                </div>
-                            
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,3 +82,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.steps-actions{
+    display:flex;
+    justify-content: center;
+    background-color: #41b883;
+    padding: 15px;
+}
+</style>
