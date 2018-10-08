@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
                     price: null,
                     duration: null,
                     location: null,
-                    players: [{"id":4,"name":"leo","surname":"muñoz"},{"id":8,"name":"ignacio","surname":"ortega"},{"id":3,"name":"rodrigo","surname":"muñoz"},{"id":2,"name":"joaquin","surname":"astudillo"},{"id":5,"name":"diego","surname":"oñate"},{"id":10,"name":"leo","surname":"figueroa"},{"id":9,"name":"esteban","surname":"re-bufel"},{"id":7,"name":"martin","surname":"mujica"},{"id":1,"name":"rodrigo","surname":"cretier"},{"id":6,"name":"maxi","surname":"mujica"}]
+                    //players: [{"id":4,"name":"leo","surname":"muñoz"},{"id":8,"name":"ignacio","surname":"ortega"},{"id":3,"name":"rodrigo","surname":"muñoz"},{"id":2,"name":"joaquin","surname":"astudillo"},{"id":5,"name":"diego","surname":"oñate"},{"id":10,"name":"leo","surname":"figueroa"},{"id":9,"name":"esteban","surname":"re-bufel"},{"id":7,"name":"martin","surname":"mujica"},{"id":1,"name":"rodrigo","surname":"cretier"},{"id":6,"name":"maxi","surname":"mujica"}]
+                    players: []
         },
         playerIdCounter: 1,
     },

@@ -11,8 +11,8 @@
                                         Let's create teams
                                     </p>
                                     <div class="tags has-addons level-item">
-                                        <span class="tag is-rounded is-info">@joaquin_cl</span>
-                                        <span class="tag is-rounded">May 10, 2018</span>
+                                        <span class="tag is-rounded is-info"><a id="link-social" href="https://www.instagram.com/joaquin_cl/" target="_blank">@joaquin_cl</a></span>
+                                        <span class="tag is-rounded">Uuuh</span>
                                     </div>
                                 </div>
                             </div>
@@ -105,5 +105,10 @@ export default {
 .paginator:disabled, .paginator[disabled]{
     color:gray;
     background-color: #41b883;
+}
+#link-social{
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
 }
 </style>
