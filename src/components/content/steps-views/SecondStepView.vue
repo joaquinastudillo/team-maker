@@ -1,18 +1,16 @@
 <template>
         <div class="step-content has-text-centered">
 
-            <div class="container">
-                    <div class="card">
-                        <div class="card-content">
-                            <p class="subtitle">
-                                <i class="fas fa-map-marker-alt"></i> {{ location }}
-                            </p>
-                        </div>
-                        <footer class="card-footer">
-                            <a class="card-footer-item">Price: {{ price }}</a> 
-                            <a class="card-footer-item general-link">Duration: {{ duration }} min</a>
-                        </footer>
-                    </div>
+            <div class="card">
+                            <div class="card-content">
+                                <p class="subtitle">
+                                    <i class="fas fa-map-marker-alt"></i> {{ location }}
+                                </p>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item">Price: {{ price }}</a> 
+                                <a class="card-footer-item general-link">Duration: {{ duration }} min</a>
+                            </footer>
             </div>
 
             <h1 class="title is-4">Players Information</h1>
@@ -81,9 +79,9 @@
 
             </form>
 
-            <div class="container">
-                <section class="section">
-                        <article class="media"
+            <br>
+
+            <article class="media"
                         v-for="(player, index) in players"
                         :key="index"
                         id="playerDisplay"
@@ -111,9 +109,7 @@
                             <div class="media-right">
                                 <button class="delete" @click="deletePlayer(index)"></button>
                             </div>
-                        </article> 
-                </section>    
-            </div>
+            </article> 
         </div>
 </template>
 

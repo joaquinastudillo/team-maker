@@ -5,23 +5,69 @@
             <div class="columns">
                 <div class="column">
                     <form @submit.prevent="generate">
-                    <input type="submit">
+                    <button class="button" :class="{ 'is-loading': isLoading }" type="submit">{{ generateButton }}</button>
                     </form>
                 </div>
             </div>
 
             <div class="columns" v-show="showTeams" id="dataTeams">
                 <div class="column">
-                    <ul>
-                        <li
-                        v-for="player in teams"
-                        :key="player.id"
-                        >
-                        {{ player.id }} - {{ player.name }} - {{ player.surname }}
-                        </li>
-                    </ul>
+
+                    <p>Team 1</p>
+
+                    <table class="table is-bordered">
+                      <thead>
+                        <tr>
+                          <th><abbr title="ID">ID</abbr></th>
+                          <th>Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="player in teamOne"
+                          :key="player.id"
+                          >
+                          <th>{{ player.id }}</th>
+                          <td><strong> {{ player.name }} {{ player.surname }}</strong>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
             </div>
+
+            <div class="columns" v-show="showTeams">
+              <div class="column">
+                <span class="tag is-warning"><b>VS</b></span>
+              </div>
+            </div>
+
+            <div class="columns" v-show="showTeams" id="dataTeams">
+                <div class="column">
+
+                    <p>Team 2</p>
+
+                    <table class="table is-bordered">
+                      <thead>
+                        <tr>
+                          <th><abbr title="ID">ID</abbr></th>
+                          <th>Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="player in teamTwo"
+                          :key="player.id"
+                          >
+                          <th>{{ player.id }}</th>
+                          <td><strong> {{ player.name }} {{ player.surname }}</strong>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+
     </div>
 </template>
 
@@ -31,7 +77,9 @@ export default {
   data() {
     return {
       showTeams: false,
-      teams: []
+      teams: [],
+      generateButton: 'Generate Teams',
+      isLoading: false
     }
   },
   mounted() {
@@ -39,6 +87,7 @@ export default {
   },
   methods: {
     generate() {
+      this.isLoading = true
       let counter = this.teams.length
       let temporalValue
       let index
@@ -56,8 +105,19 @@ export default {
         //this.teams[index] = temporalValue
         this.$set(this.teams, index, temporalValue)
       }
-      this.showTeams = true;
+      this.showTeams = true
+      this.isLoading = false
+      this.generateButton = 'Re Generate Teams'
     }
+  },
+  computed : {
+    teamOne(){
+      return this.teams.slice(0, Math.ceil(this.teams.length / 2))
+    },
+    teamTwo(){
+      return this.teams.slice((this.teams.length/2), Math.ceil(this.teams.length))
+    },
+
   }
 }
 </script>
