@@ -72,7 +72,7 @@
             </div>
 
             <div class="control" id="addButton">
-                <button class="button">
+                <button class="button paginator">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -80,11 +80,11 @@
             </form>
 
             <br>
-
-            <article class="media"
+            
+            <transition-group name="players-container">
+            <article class="media playerDisplay"
                         v-for="(player, index) in players"
-                        :key="index"
-                        id="playerDisplay"
+                        :key="player.id"
                         >   
                             #{{ index+1 }}
                             <figure class="media-left">
@@ -109,72 +109,95 @@
                             <div class="media-right">
                                 <button class="delete" @click="deletePlayer(index)"></button>
                             </div>
-            </article> 
+            </article>
+            </transition-group>
         </div>
 </template>
 
 <script>
-    export default {
-        name: 'SecondStepViewApp',
-        data(){
-            return {
-                player: {
-                    playerName: null,
-                    playerSurname: null
-                }
-            }
-        },
-        computed: {
-            players: {
-                get(){
-                    return this.$store.getters.players
-                }
-            },
-            location: {
-                get(){
-                    return this.$store.getters.location
-                }
-            },
-            duration: {
-                get(){
-                    return this.$store.getters.duration
-                }
-            },
-            price: {
-                get(){
-                    return this.$store.getters.price
-                }
-            }
-            
-        },
-        methods: {
-            addPlayer(){
-                this.$store.commit('addPlayer', this.player)
-                this.player.playerName = '',
-                this.player.playerSurname = ''
-            },
-            deletePlayer(index){
-                this.players.splice(index, 1)
-            }
-        }
+export default {
+  name: "SecondStepViewApp",
+  data() {
+    return {
+      player: {
+        playerName: null,
+        playerSurname: null
+      }
+    };
+  },
+  computed: {
+    players: {
+      get() {
+        return this.$store.getters.players;
+      }
+    },
+    location: {
+      get() {
+        return this.$store.getters.location;
+      }
+    },
+    duration: {
+      get() {
+        return this.$store.getters.duration;
+      }
+    },
+    price: {
+      get() {
+        return this.$store.getters.price;
+      }
     }
+  },
+  methods: {
+    addPlayer() {
+      this.$store.commit("addPlayer", this.player);
+      (this.player.playerName = ""), (this.player.playerSurname = "");
+    },
+    deletePlayer(index) {
+      this.players.splice(index, 1);
+    }
+  }
+};
 </script>
 
 
 <style>
-    #addButton{
-        display: flex;
-        justify-content: flex-end;
-    }
-    #playerDisplay{
-        height: 70px;
-        padding: 15px;
-        background-color: #41b883;
-        color: white;
-        border-radius: 7px;
-    }
-    #playersName{
-        color:white;
-        text-transform: uppercase;
-    }
+#addButton {
+  display: flex;
+  justify-content: flex-end;
+}
+.playerDisplay {
+  height: 70px;
+  padding: 15px;
+  background-color: #41b883;
+  color: white;
+  border-radius: 7px;
+  transition: all 0.5s ease-out;
+}
+
+.playerDisplay:hover{
+    transform: scale(1.05);
+}
+
+#playersName {
+  color: white;
+  text-transform: uppercase;
+}
+
+.players-container-enter-active {
+  animation: bounce-in 0.5s;
+}
+.players-container-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>

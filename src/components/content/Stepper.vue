@@ -32,7 +32,7 @@
                          <div class="steps-actions">
                                     <div class="field is-grouped">
                                         <p class="control">
-                                            <a class="button" 
+                                            <a class="button paginator" 
                                                @click="$store.commit('prevStep')" 
                                                :disabled="$store.state.activeStep <= 1"
                                                >
@@ -40,7 +40,7 @@
                                             </a>
                                         </p>
                                         <p class="control">
-                                            <a class="button" 
+                                            <a class="button paginator" 
                                                @click="$store.commit('nextStep')"
                                                :disabled="$store.state.activeStep >= 3"
                                                >
@@ -59,7 +59,7 @@
 <script>
 import "../../../node_modules/bulma-extensions/bulma-steps/dist/js/bulma-steps.js";
 import "../../../node_modules/bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css";
-import firstStepApp from "./steps/firstStep.vue";
+import firstStepApp from "./steps/FirstStep.vue";
 import firstStepAppView from "./steps-views/firstStepView.vue";
 import SecondStepApp from "./steps/SecondStep.vue";
 import SecondStepViewApp from "./steps-views/SecondStepView.vue";
@@ -89,5 +89,21 @@ export default {
     justify-content: center;
     background-color: #41b883;
     padding: 15px;
+}
+.paginator{
+    border: 2px solid #39a273;
+    background-color: #41b883;
+    color: white;
+    font-weight: 800;
+}
+.paginator:hover{
+    background-color: #39a273;
+    border: 2px solid #39a273;
+    font-weight: 800;
+    color:white;
+}
+.paginator:disabled, .paginator[disabled]{
+    color:gray;
+    background-color: #41b883;
 }
 </style>

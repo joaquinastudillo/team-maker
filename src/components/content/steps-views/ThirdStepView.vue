@@ -9,8 +9,8 @@
                     </form>
                 </div>
             </div>
-
-            <div class="columns" v-show="showTeams" id="dataTeams">
+             
+             <div class="columns" v-show="showTeams" id="dataTeams">
                 <div class="column">
 
                     <p>Team 1</p>
@@ -41,12 +41,13 @@
                 <span class="tag is-warning"><b>VS</b></span>
               </div>
             </div>
+            
 
             <div class="columns" v-show="showTeams" id="dataTeams">
                 <div class="column">
 
                     <p>Team 2</p>
-
+                    
                     <table class="table is-bordered">
                       <thead>
                         <tr>
@@ -121,3 +122,24 @@ export default {
   }
 }
 </script>
+
+<style>
+.teams-container-enter-active {
+  animation: bounce-in 0.5s;
+}
+.teams-container-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+
