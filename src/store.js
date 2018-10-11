@@ -1,6 +1,5 @@
 import Vuex from "vuex";
 import Vue from "vue";
-import { stat } from "fs";
 
 Vue.use(Vuex);
 

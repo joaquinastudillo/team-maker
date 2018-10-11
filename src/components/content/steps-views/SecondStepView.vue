@@ -15,8 +15,13 @@
 
             <h1 class="title is-4">Players Information</h1>
 
-            <form @submit.prevent="loadFromText">
+            <div class="fied">
+                <label for=""><span class="tag" :class="[isLight ? 'is-light' : 'is-success']" @click="toggleTextArea">Copy & Paste players</span></label>
+            </div>
 
+            <transition name="slide-fade">
+            <form @submit.prevent="loadFromText" v-if="addByText">
+            <br>
             <div class="field is-horizontal">
                 <div class="field-label is-normal is-centered-flex">
                     <div class="control" id="">
@@ -40,10 +45,11 @@
                 </div>
             </div>
             </form>
+            </transition>
 
             <br>
 
-            <form @submit.prevent="addPlayer">
+            <form @submit.prevent="addPlayer" >
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
@@ -99,13 +105,6 @@
                                     <strong class="playersName">{{ player.name }}</strong>
                                 </p>
                                 </div>
-                                <nav class="level is-mobile">
-                                <div class="level-left">
-                                    <!--<a class="level-item">
-                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                    </a>-->
-                                </div>
-                                </nav>
                             </div>
                             <div class="media-right">
                                 <button class="delete" @click="deletePlayer(index)"></button>
@@ -124,7 +123,9 @@ export default {
         playerName: null,
       },
       textAreaData: '',
-      loadData: []
+      loadData: [],
+      addByText: false,
+      isLight: true
     };
   },
   computed: {
@@ -175,7 +176,10 @@ export default {
           });
           counter++;
         });
-        console.log(this.players)
+    },
+    toggleTextArea(){
+        this.addByText = !this.addByText
+        this.isLight = !this.isLight
     }
   }
 };
@@ -226,5 +230,21 @@ export default {
 .is-centered-flex{
     display: flex;
     justify-content: center;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.is-success{
+    background-color: #41b883;
 }
 </style>
