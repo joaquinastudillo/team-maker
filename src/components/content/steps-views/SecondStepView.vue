@@ -15,6 +15,34 @@
 
             <h1 class="title is-4">Players Information</h1>
 
+            <form @submit.prevent="loadFromText">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal is-centered-flex">
+                    <div class="control" id="">
+                        <button type="submit" class="button paginator">
+                            <i class="fas fa-upload"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <textarea 
+                        class="textarea" 
+                        placeholder="paste the list of players" 
+                        rows="10"
+                        v-model="textAreaData"
+                    >
+                    </textarea>
+                    </p>
+                </div>
+                </div>
+            </div>
+            </form>
+
+            <br>
+
             <form @submit.prevent="addPlayer">
 
             <div class="field is-horizontal">
@@ -44,33 +72,6 @@
                 </div>
             </div>
 
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                <label class="label">Surname</label>
-                </div>
-                <div class="field-body">
-                <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                        <input 
-                            class="input" 
-                            name="surname" 
-                            id="surname" 
-                            type="surname" 
-                            placeholder="player surname" 
-                            required
-                            v-model="player.playerSurname"
-                        >
-                        <span class="icon is-small is-left">
-                        <i class="fas fa-signature"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                        <i class="fas fa-check"></i>
-                        </span>
-                    </p>
-                </div>
-                </div>
-            </div>
-
             <div class="control" id="addButton">
                 <button class="button paginator">
                     <i class="fas fa-plus"></i>
@@ -86,7 +87,7 @@
                         v-for="(player, index) in players"
                         :key="player.id"
                         >   
-                            #{{ index+1 }}
+                            #{{ index + 1 }}
                             <figure class="media-left">
                                 <p class="image is-64x64">
                                     <i class="fas fa-futbol fa-3x"></i>
@@ -95,7 +96,7 @@
                             <div class="media-content">
                                 <div class="content">
                                 <p>
-                                    <strong id="playersName">{{ player.name}} {{ player.surname }}</strong>
+                                    <strong class="playersName">{{ player.name }}</strong>
                                 </p>
                                 </div>
                                 <nav class="level is-mobile">
@@ -121,14 +122,18 @@ export default {
     return {
       player: {
         playerName: null,
-        playerSurname: null
-      }
+      },
+      textAreaData: '',
+      loadData: []
     };
   },
   computed: {
     players: {
       get() {
         return this.$store.getters.players;
+      },
+      set(newValue){
+        this.$store.commit('updatePlayersBytext', newValue)   
       }
     },
     location: {
@@ -150,10 +155,27 @@ export default {
   methods: {
     addPlayer() {
       this.$store.commit("addPlayer", this.player);
-      (this.player.playerName = ""), (this.player.playerSurname = "");
+      this.player.playerName = ""
     },
     deletePlayer(index) {
-      this.players.splice(index, 1);
+      this.$store.commit('deletePlayer', index)
+    },
+    loadFromText(){
+        const tempArray = this.textAreaData.split('\n')
+        let beginningArray = tempArray.indexOf("...")
+        let endArray = tempArray.indexOf("...", beginningArray + 1) 
+
+        this.loadData = tempArray.slice(beginningArray + 1, endArray)
+
+        let counter = 0
+        this.loadData.forEach(element => {
+          this.$set(this.players, counter, {
+            id: counter,
+            name: element
+          });
+          counter++;
+        });
+        console.log(this.players)
     }
   }
 };
@@ -178,7 +200,7 @@ export default {
     transform: scale(1.05);
 }
 
-#playersName {
+.playersName {
   color: white;
   text-transform: uppercase;
 }
@@ -199,5 +221,10 @@ export default {
   100% {
     transform: scale(1);
   }
+}
+
+.is-centered-flex{
+    display: flex;
+    justify-content: center;
 }
 </style>

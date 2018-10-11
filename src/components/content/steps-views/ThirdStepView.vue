@@ -28,7 +28,7 @@
                           :key="player.id"
                           >
                           <th>{{ player.id }}</th>
-                          <td><strong> {{ player.name }} {{ player.surname }}</strong>
+                          <td><strong> {{ player.name }}</strong>
                           </td>
                         </tr>
                       </tbody>
@@ -61,7 +61,7 @@
                           :key="player.id"
                           >
                           <th>{{ player.id }}</th>
-                          <td><strong> {{ player.name }} {{ player.surname }}</strong>
+                          <td><strong> {{ player.name }}</strong>
                           </td>
                         </tr>
                       </tbody>
