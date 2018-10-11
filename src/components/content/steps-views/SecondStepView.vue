@@ -244,7 +244,8 @@ export default {
   opacity: 0;
 }
 
-.is-success{
+.tag:not(body).is-success {
     background-color: #41b883;
+    color: #fff;
 }
 </style>
