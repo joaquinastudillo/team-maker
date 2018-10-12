@@ -1,6 +1,6 @@
 <template>
         <div>
-            <nav class="navbar is-success">
+            <nav class="navbar is-success" id="football-green-nav">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="#!">
                         
@@ -33,7 +33,7 @@
 </script>
 
 <style>
-.navbar.is-success {
+#football-green-nav {
     background-color: #41b883;
     color: #fff;
 }

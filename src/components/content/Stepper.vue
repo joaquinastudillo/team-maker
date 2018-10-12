@@ -28,12 +28,27 @@
                                 <third-step-view-app v-if="activeStep == 3"></third-step-view-app>
                             
                             </div>
+
+                            <div class="notification is-danger" v-if="errors.length">
+                                    <button class="delete"></button>
+                                    <p>
+                                        <b>Please correct the following error(s):</b>
+                                        <ul>
+                                            <li v-for="(error, index) in errors"
+                                                :key="index"
+                                            >
+                                                {{ error }}
+                                            </li>
+                                        </ul>
+                                    </p>
+                            </div>
+
                         </div>
                          <div class="steps-actions">
                                     <div class="field is-grouped">
                                         <p class="control">
                                             <a class="button paginator" 
-                                               @click="$store.commit('prevStep')" 
+                                               @click="prevStep" 
                                                :disabled="$store.state.activeStep <= 1"
                                                >
                                             previous
@@ -41,7 +56,7 @@
                                         </p>
                                         <p class="control">
                                             <a class="button paginator" 
-                                               @click="$store.commit('nextStep')"
+                                               @click="nextStep"
                                                :disabled="$store.state.activeStep >= 3"
                                                >
                                             next
@@ -67,6 +82,11 @@ import ThirdStepApp from "./steps/ThirdStep.vue";
 import ThirdStepViewApp from "./steps-views/ThirdStepView.vue";
 export default {
   name: "StepperApp",
+  data() {
+    return {
+      errors: []
+    };
+  },
   components: {
     firstStepApp,
     firstStepAppView,
@@ -75,40 +95,83 @@ export default {
     ThirdStepApp,
     ThirdStepViewApp
   },
+  methods: {
+    prevStep() {
+      this.$store.commit("prevStep");
+    },
+    nextStep() {
+      this.emptyErrorsArray();
+      this.checkInputs();
+      if (!this.errors.length) {
+        this.$store.commit("nextStep");
+      }
+    },
+    checkInputs() {
+      if (this.activeStep == 1) {
+        if (!this.$store.getters.price) {
+          this.errors.push("Price required");
+        }
+        if (!this.$store.getters.duration) {
+          this.errors.push("Minutes required");
+        }
+        if (!this.$store.getters.location) {
+          this.errors.push("Location required");
+        }
+      }
+      if(this.activeStep == 2){
+          if(this.$store.getters.players.length < 10){
+              this.errors.push("Match must be at least with 10 players")
+          }else{
+              if(this.$store.getters.players.length % 2){
+                  this.errors.push("The number of players must be divisible by 2")
+              }
+          }
+      }
+    },
+    emptyErrorsArray() {
+      while (this.errors.length > 0) {
+        this.errors.pop();
+      }
+    }
+  },
   computed: {
     activeStep() {
       return this.$store.getters.activatedStep;
+    },
+    errorArrayLength() {
+      return this.errors.length;
     }
   }
-}
+};
 </script>
 
 <style>
-.steps-actions{
-    display:flex;
-    justify-content: center;
-    background-color: #41b883;
-    padding: 15px;
+.steps-actions {
+  display: flex;
+  justify-content: center;
+  background-color: #41b883;
+  padding: 15px;
 }
-.paginator{
-    border: 2px solid #39a273;
-    background-color: #41b883;
-    color: white;
-    font-weight: 800;
+.paginator {
+  border: 2px solid #39a273;
+  background-color: #41b883;
+  color: white;
+  font-weight: 800;
 }
-.paginator:hover{
-    background-color: #39a273;
-    border: 2px solid #39a273;
-    font-weight: 800;
-    color:white;
+.paginator:hover {
+  background-color: #39a273;
+  border: 2px solid #39a273;
+  font-weight: 800;
+  color: white;
 }
-.paginator:disabled, .paginator[disabled]{
-    color:gray;
-    background-color: #41b883;
+.paginator:disabled,
+.paginator[disabled] {
+  color: gray;
+  background-color: #41b883;
 }
-#link-social{
-    text-decoration: none;
-    color: white;
-    font-weight: 800;
+#link-social {
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
 }
 </style>

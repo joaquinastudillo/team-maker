@@ -14,7 +14,9 @@ export const store = new Vuex.Store({
       //players: [{"id":4,"name":"leo","surname":"muñoz"},{"id":8,"name":"ignacio","surname":"ortega"},{"id":3,"name":"rodrigo","surname":"muñoz"},{"id":2,"name":"joaquin","surname":"astudillo"},{"id":5,"name":"diego","surname":"oñate"},{"id":10,"name":"leo","surname":"figueroa"},{"id":9,"name":"esteban","surname":"re-bufel"},{"id":7,"name":"martin","surname":"mujica"},{"id":1,"name":"rodrigo","surname":"cretier"},{"id":6,"name":"maxi","surname":"mujica"}]
       players: []
     },
-    playerIdCounter: 1
+    playerIdCounter: 1,
+    stepOneCompleted: false,
+    stepTwoCompleted: false
   },
   mutations: {
     activateLoading(state) {
@@ -24,7 +26,15 @@ export const store = new Vuex.Store({
       state.loading = false;
     },
     nextStep(state) {
-      if (state.activeStep < 3) state.activeStep++;
+      if (state.activeStep < 3){ 
+          if(state.activeStep == 1){
+            state.stepOneCompleted = true
+          }
+          if(state.activeStep == 2){
+            state.stepTwoCompleted = true
+          }
+          state.activeStep++;
+      }
     },
     prevStep(state) {
       if (state.activeStep > 1) state.activeStep--;
@@ -97,6 +107,12 @@ export const store = new Vuex.Store({
     },
     duration: state => {
       return state.match.duration;
+    },
+    stepOneCompleted: state => {
+        return state.stepOneCompleted
+    },
+    stepTwoCompleted: state => {
+        return state.stepTwoCompleted
     }
   }
 });

@@ -9,32 +9,32 @@
                     </form>
                 </div>
             </div>
-             
-             <div class="columns" v-show="showTeams" id="dataTeams">
+
+
+            <transition name="fade">
+            <div class="columns" v-show="showTeams">
                 <div class="column">
 
                     <p>Team 1</p>
 
-                    <table class="table is-bordered">
+                    <table class="table is-responsive">
                       <thead>
                         <tr>
-                          <th><abbr title="ID">ID</abbr></th>
-                          <th>Name</th>
+                          <th>Players</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr
-                          v-for="player in teamOne"
-                          :key="player.id"
-                          >
-                          <th>{{ player.id }}</th>
-                          <td><strong> {{ player.name }}</strong>
-                          </td>
+                        v-for="(player,index) in teamOne"
+                        :key="index"
+                        >
+                          <td>{{ player.name }}</td>
                         </tr>
                       </tbody>
                     </table>
                 </div>
             </div>
+            </transition>
 
             <div class="columns" v-show="showTeams">
               <div class="column">
@@ -42,32 +42,41 @@
               </div>
             </div>
             
-
-            <div class="columns" v-show="showTeams" id="dataTeams">
+            <transition name="fade">
+            <div class="columns" v-show="showTeams">
                 <div class="column">
 
                     <p>Team 2</p>
-                    
-                    <table class="table is-bordered">
+
+                    <table class="table is-responsive">
                       <thead>
                         <tr>
-                          <th><abbr title="ID">ID</abbr></th>
-                          <th>Name</th>
+                          <th>Players</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr
-                          v-for="player in teamTwo"
-                          :key="player.id"
-                          >
-                          <th>{{ player.id }}</th>
-                          <td><strong> {{ player.name }}</strong>
-                          </td>
+                        v-for="(player,index) in teamTwo"
+                        :key="index"
+                        >
+                          <td>{{ player.name }}</td>
                         </tr>
                       </tbody>
                     </table>
                 </div>
             </div>
+            </transition>
+
+
+            <p class="buttons">
+              <a class="button" @click="exportData">
+                <span class="icon">
+                  <i class="fas fa-share-alt-square"></i>
+                </span>
+                <span>Export</span>
+              </a>
+            </p>
+            
 
     </div>
 </template>
@@ -87,6 +96,16 @@ export default {
     this.teams = this.$store.getters.players
   },
   methods: {
+    exportData(){
+      this.$router.push({
+        path: '/results',
+        query: {
+          storeData: this.$store.state,
+          teamOne: this.teamOne,
+          teamTwo: this.teamTwo
+        }
+      })
+    },
     generate() {
       this.isLoading = true
       let counter = this.teams.length
@@ -140,6 +159,16 @@ export default {
   100% {
     transform: scale(1);
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fade-move {
+  transition: transform 1s;
 }
 </style>
 

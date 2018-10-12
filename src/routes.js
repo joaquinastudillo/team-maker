@@ -1,6 +1,6 @@
 import MainApp from './components/content/Main.vue'
 import StepperApp from './components/content/Stepper.vue'
-import GridStepApp from './components/content/steps/GridStep.vue'
+import ResultsApp from './components/content/steps/Results.vue'
 
 export const routes = [
     {
@@ -10,12 +10,10 @@ export const routes = [
     {
         path: '/stepper',
         component: StepperApp,
-        children: [
-            {
-                path: 'step',
-                component: GridStepApp
-            }
-        ]
+    },
+    {
+        path: '/results',
+        component: ResultsApp
     }
 ]
 

@@ -1,6 +1,6 @@
 <template>
     <div class="step-item"
-        :class="{ 'is-active': isActive }"
+        :class="{ 'is-active': isActive , 'is-completed' : isCompleted }"
         >
         <div class="step-marker">{{ step.id }}</div>
         <div class="step-details">
@@ -26,6 +26,9 @@
         computed: {
             isActive(){
                 return this.$store.getters.activatedStep == this.step.id
+            },
+            isCompleted(){
+                return this.$store.getters.stepOneCompleted
             }
         }
     }
