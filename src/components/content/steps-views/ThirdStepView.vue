@@ -68,12 +68,12 @@
             </transition>
 
 
-            <p class="buttons">
+            <p class="buttons" v-if="showExportButton" id="justify-export-button">
               <a class="button" @click="exportData">
                 <span class="icon">
                   <i class="fas fa-share-alt-square"></i>
                 </span>
-                <span>Export</span>
+                <span>Display data</span>
               </a>
             </p>
             
@@ -89,7 +89,8 @@ export default {
       showTeams: false,
       teams: [],
       generateButton: 'Generate Teams',
-      isLoading: false
+      isLoading: false,
+      showExportButton : false
     }
   },
   mounted() {
@@ -128,6 +129,7 @@ export default {
       this.showTeams = true
       this.isLoading = false
       this.generateButton = 'Re Generate Teams'
+      this.showExportButton = true
     }
   },
   computed : {
@@ -169,6 +171,10 @@ export default {
 }
 .fade-move {
   transition: transform 1s;
+}
+#justify-export-button{
+  display: flex;
+  justify-content: center;
 }
 </style>
 

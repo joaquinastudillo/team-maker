@@ -1,13 +1,13 @@
 <template>
-            <div class="container">
+            <div class="container" v-if="collectedData">
                 <div class="column is-8 is-offset-2">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                        <img src="../../../assets/background.jpg" alt="Placeholder image">
+                        <img src="@/assets/background.jpg" alt="Placeholder image">
                         </figure>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content" v-if="collectedData.match">
                         <div class="media">
                         <div class="media-content">
                             <p class="title is-4">{{ collectedData.match.location }}</p>

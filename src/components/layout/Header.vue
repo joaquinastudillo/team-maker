@@ -2,7 +2,7 @@
         <div>
             <nav class="navbar is-success" id="football-green-nav">
                     <div class="navbar-brand">
-                        <a class="navbar-item" href="#!">
+                        <a class="navbar-item" href="/">
                         
                             <p>Team Maker</p>
                         
