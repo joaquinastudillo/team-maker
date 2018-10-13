@@ -4,10 +4,11 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                        <img src="@/assets/background.jpg" alt="Placeholder image">
+                        <img src="" alt="Placeholder image">
+                        <img alt="Vue logo" :src="src">
                         </figure>
                     </div>
-                    <div class="card-content" v-if="collectedData.match">
+                    <div class="card-content" v-if="collectedData.match.location">
                         <div class="media">
                         <div class="media-content">
                             <p class="title is-4">{{ collectedData.match.location }}</p>
@@ -78,7 +79,8 @@ export default {
   name: "ResultsApp",
   data() {
     return {
-      collectedData: {}
+      collectedData: {},
+      src: require('../../../assets/background.jpg')
     };
   },
   mounted() {
